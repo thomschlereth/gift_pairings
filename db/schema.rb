@@ -10,18 +10,47 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171105223755) do
+ActiveRecord::Schema.define(version: 20171105233635) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "groupings", force: :cascade do |t|
+    t.string "name"
+  end
+
+  create_table "groupings_users", id: false, force: :cascade do |t|
+    t.integer "grouping_id", null: false
+    t.integer "user_id",     null: false
+    t.index ["grouping_id", "user_id"], name: "index_groupings_users_on_grouping_id_and_user_id", using: :btree
+    t.index ["user_id", "grouping_id"], name: "index_groupings_users_on_user_id_and_grouping_id", using: :btree
+  end
+
+  create_table "occasions", force: :cascade do |t|
+    t.string "title"
+    t.string "year"
+  end
+
+  create_table "occasions_users", id: false, force: :cascade do |t|
+    t.integer "occasion_id", null: false
+    t.integer "user_id",     null: false
+    t.index ["occasion_id", "user_id"], name: "index_occasions_users_on_occasion_id_and_user_id", using: :btree
+    t.index ["user_id", "occasion_id"], name: "index_occasions_users_on_user_id_and_occasion_id", using: :btree
+  end
+
   create_table "users", force: :cascade do |t|
     t.string  "first_name"
     t.string  "last_name"
-    t.integer "giver_id_id"
-    t.integer "reciever_id_id"
-    t.index ["giver_id_id"], name: "index_users_on_giver_id_id", using: :btree
-    t.index ["reciever_id_id"], name: "index_users_on_reciever_id_id", using: :btree
+    t.integer "giver_id"
+    t.integer "reciever_id"
+    t.index ["giver_id"], name: "index_users_on_giver_id", using: :btree
+    t.index ["reciever_id"], name: "index_users_on_reciever_id", using: :btree
   end
 
+  add_foreign_key "groupings_users", "groupings"
+  add_foreign_key "groupings_users", "users"
+  add_foreign_key "occasions_users", "occasions"
+  add_foreign_key "occasions_users", "users"
+  add_foreign_key "users", "users", column: "giver_id"
+  add_foreign_key "users", "users", column: "reciever_id"
 end
