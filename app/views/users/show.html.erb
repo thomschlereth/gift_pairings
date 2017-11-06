@@ -6,11 +6,11 @@
     </p>
   </div>
 
-  <% if @user.reciever %>
+  <% @user.recievers.each do |reciever| %>
     <div class="card">
       <div class="card-body">
         <p>
-          You will be giving to <%= "#{@user.reciever.first_name} #{@user.reciever.last_name}" %>
+          You will be giving to <%= "#{reciever.first_name} #{reciever.last_name}" %>
         </p>
       </div>
     </div>

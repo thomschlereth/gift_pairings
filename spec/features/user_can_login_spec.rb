@@ -2,10 +2,12 @@ require 'rails_helper'
 
 describe 'User visits homepage' do
   it 'User clicks login' do
+    event = Occasion.create(title: "Test")
     user = User.create(first_name: "First",
                         last_name: "Last",
                         username: "Username",
                         password: "password")
+    event.occasions_users.create(user: user)
 
     visit '/'
 
