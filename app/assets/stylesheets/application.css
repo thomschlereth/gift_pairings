@@ -32,9 +32,15 @@ body {
 }
 
 .card {
-  opacity: 0.4;
+  opacity: 0.75;
+  /*background:rgba(192,192,192,0.3)*/
 }
 
 li {
   color: purple;
+}
+
+.form-container {
+  margin-top: 7%;
+  padding: 1%;
 }
