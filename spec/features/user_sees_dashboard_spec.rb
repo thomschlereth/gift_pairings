@@ -13,6 +13,8 @@ describe "user visits show" do
                         reciever: reciever,
                         password: "password")
 
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+
     visit user_path(user)
 
     expect(page).to have_content("Welcome #{user.first_name} #{user.last_name}")

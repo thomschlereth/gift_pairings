@@ -9,12 +9,12 @@ describe 'User visits homepage' do
 
     visit '/'
 
-    click_link 'login'
+    click_link 'Login'
 
     fill_in 'username', with: user.username
     fill_in 'password', with: 'password'
 
-    click 'Login'
+    click_button 'Login'
 
     expect(current_path).to eq(user_path(user))
 

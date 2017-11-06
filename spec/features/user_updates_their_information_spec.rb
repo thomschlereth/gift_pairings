@@ -9,6 +9,8 @@ describe "user visits their update page" do
 
     old_username = user.username
     new_username = "new_username"
+
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
     visit user_path(user)
 
     click_link "Update Your Information"
