@@ -31,28 +31,28 @@ ActiveRecord::Schema.define(version: 20171105235937) do
     t.string "year"
   end
 
-  create_table "occasions_users", id: false, force: :cascade do |t|
-    t.integer "occasion_id", null: false
-    t.integer "user_id",     null: false
-    t.index ["occasion_id", "user_id"], name: "index_occasions_users_on_occasion_id_and_user_id", using: :btree
-    t.index ["user_id", "occasion_id"], name: "index_occasions_users_on_user_id_and_occasion_id", using: :btree
+  create_table "occasions_users", force: :cascade do |t|
+    t.integer "occasion_id"
+    t.integer "user_id"
+    t.integer "giver_id"
+    t.integer "reciever_id"
+    t.index ["giver_id"], name: "index_occasions_users_on_giver_id", using: :btree
+    t.index ["occasion_id"], name: "index_occasions_users_on_occasion_id", using: :btree
+    t.index ["reciever_id"], name: "index_occasions_users_on_reciever_id", using: :btree
+    t.index ["user_id"], name: "index_occasions_users_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
-    t.string  "first_name"
-    t.string  "last_name"
-    t.integer "giver_id"
-    t.integer "reciever_id"
-    t.string  "username"
-    t.string  "password_digest"
-    t.index ["giver_id"], name: "index_users_on_giver_id", using: :btree
-    t.index ["reciever_id"], name: "index_users_on_reciever_id", using: :btree
+    t.string "first_name"
+    t.string "last_name"
+    t.string "username"
+    t.string "password_digest"
   end
 
   add_foreign_key "groupings_users", "groupings"
   add_foreign_key "groupings_users", "users"
   add_foreign_key "occasions_users", "occasions"
+  add_foreign_key "occasions_users", "occasions_users", column: "giver_id"
+  add_foreign_key "occasions_users", "occasions_users", column: "reciever_id"
   add_foreign_key "occasions_users", "users"
-  add_foreign_key "users", "users", column: "giver_id"
-  add_foreign_key "users", "users", column: "reciever_id"
 end
