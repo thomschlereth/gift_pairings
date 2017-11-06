@@ -10,6 +10,10 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
+    User.create_pairings
+    @receivers = User.check_recievers
+    @givers    = User.check_givers
+
   end
 
   def update
