@@ -2,8 +2,10 @@ class User < ApplicationRecord
 
   has_secure_password
 
-  has_many :groupings_users
-  has_many :groupings, through: :groupings_users
+  belongs_to :grouping
+  
+  # has_many :groupings_users
+  # has_many :groupings, through: :groupings_users
   has_many :occasions_users
   has_many :occasions, through: :occasions_users
 

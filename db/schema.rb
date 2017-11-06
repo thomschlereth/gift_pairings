@@ -19,13 +19,6 @@ ActiveRecord::Schema.define(version: 20171105235937) do
     t.string "name"
   end
 
-  create_table "groupings_users", id: false, force: :cascade do |t|
-    t.integer "grouping_id", null: false
-    t.integer "user_id",     null: false
-    t.index ["grouping_id", "user_id"], name: "index_groupings_users_on_grouping_id_and_user_id", using: :btree
-    t.index ["user_id", "grouping_id"], name: "index_groupings_users_on_user_id_and_grouping_id", using: :btree
-  end
-
   create_table "occasions", force: :cascade do |t|
     t.string "title"
     t.string "year"
@@ -43,16 +36,17 @@ ActiveRecord::Schema.define(version: 20171105235937) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
-    t.string "username"
-    t.string "password_digest"
+    t.string  "first_name"
+    t.string  "last_name"
+    t.string  "username"
+    t.string  "password_digest"
+    t.integer "grouping_id"
+    t.index ["grouping_id"], name: "index_users_on_grouping_id", using: :btree
   end
 
-  add_foreign_key "groupings_users", "groupings"
-  add_foreign_key "groupings_users", "users"
   add_foreign_key "occasions_users", "occasions"
   add_foreign_key "occasions_users", "occasions_users", column: "giver_id"
   add_foreign_key "occasions_users", "occasions_users", column: "reciever_id"
   add_foreign_key "occasions_users", "users"
+  add_foreign_key "users", "groupings"
 end

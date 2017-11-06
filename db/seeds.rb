@@ -18,8 +18,8 @@ module Seed
 
     groupings.each do |grouping|
       users.each do |user|
-        if user.last_name == grouping.name
-          GroupingsUser.create(grouping_id: grouping.id, user_id: user.id)
+        if grouping.name == user.last_name
+          User.update(grouping: grouping)
         end
       end
     end
@@ -76,9 +76,9 @@ users = [
   { first_name: "Nicole", last_name: "Pickett", username: "nicole_pickett", password: 'password' }
 ]
 groupings = [
-  { name: "Hargett Couple" },
-  { name: "Pickett Couple" },
-  { name: "Howell Couple" },
-  { name: "Schlereth Couple" }
+  { name: "Hargett" },
+  { name: "Pickett" },
+  { name: "Howell" },
+  { name: "Schlereth" }
 ]
 Seed.run(occasion,users,groupings)
