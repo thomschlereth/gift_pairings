@@ -8,4 +8,7 @@ class User < ApplicationRecord
   has_many :occasions_users
   has_many :occasions, through: :occasions_users
 
+  validates_presence_of :first_name, :last_name, :username, :password
+  valdates_uniqueness_of :username
+
 end
