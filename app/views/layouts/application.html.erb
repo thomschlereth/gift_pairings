@@ -19,8 +19,13 @@
             <li><%= link_to "Login", login_path, class: "nav-item nav-link" %></li>
           <% end %>
         </ul>
-
       </nav>
+
+      <% flash.each do |key, value| %>
+        <div class=flash_<%= key %> >
+          <%= content_tag(:div, sanitize(value), class: "alert alert-#{key}") %>
+        </div>
+      <% end %>
       <%= yield %>
   </body>
 </html>

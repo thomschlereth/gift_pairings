@@ -6,10 +6,8 @@ class SessionsController < ApplicationController
   def create
     @user = User.find_by(username: params[:username])
     if @user && @user.authenticate(params[:password])
-      flash[:success] = "Wokka Wokka"
       session[:user_id] = @user.id
-
-      redirect_to user_path(@user)
+      check_login_toggle_and_redirect
     else
       render :new
     end
@@ -17,4 +15,16 @@ class SessionsController < ApplicationController
 
   def destroy
   end
+
+  private
+
+    def check_login_toggle_and_redirect
+      if current_user.first_time_toggle
+        flash[:warning] = "Since this is your first visit, please update your password before continuing."
+        redirect_to edit_user_path(current_user)
+      else
+        flash[:success] = "Wokka Wokka"
+        redirect_to user_path(current_user)
+      end
+    end
 end

@@ -6,7 +6,8 @@ describe 'User visits homepage' do
     user = User.create(first_name: "First",
                         last_name: "Last",
                         username: "Username",
-                        password: "notpassword")
+                        password: "notpassword",
+                        first_time_toggle: false)
     event.occasions_users.create(user: user)
 
     visit '/'
@@ -41,7 +42,7 @@ describe 'User visits homepage' do
     expect(current_path).to eq(edit_user_path(user))
     expect(page).to have_content("Since this is your first visit, please update your password before continuing.")
 
-    fill_in 'password', with: "newpassword"
+    fill_in 'user[password]', with: "newpassword"
     click_button "Update User"
 
     expect(current_path).to eq user_path(user)
