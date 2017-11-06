@@ -1,4 +1,4 @@
-require "spec_helper"
+require "rails_helper"
 
 describe "user visits show" do
   it "they see who they give to" do
@@ -7,7 +7,7 @@ describe "user visits show" do
                             username: "Receiver",
                             password: "password")
 
-    user = User.create(fist_name: "First",
+    user = User.create(first_name: "First",
                         last_name: "Last",
                         username: "Username",
                         reciever: reciever,
