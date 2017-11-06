@@ -1,6 +1,6 @@
 class GroupingsUser < ApplicationRecord
 
-  has_many :groupings
-  has_many :users
+  belongs_to :grouping
+  belongs_to :user
 
 end

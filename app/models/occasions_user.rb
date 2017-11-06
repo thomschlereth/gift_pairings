@@ -1,6 +1,6 @@
 class OccasionsUser < ApplicationRecord
 
-  has_many :occasions
-  has_many :users
+  belongs_to :occasion
+  belongs_to :user
 
 end

@@ -1,5 +1,15 @@
-<h2>Welcome <%= "#{@user.first_name} #{@user.last_name}" %></h2>
+<div class="container">
+  <div>
+    <h2 class="header">Welcome <%= "#{@user.first_name} #{@user.last_name}" %></h2>
+  </div>
 
-<p>
-  You will be giving to <%= "#{@user.reciever.first_name} #{@user.reciever.last_name}" %>
-</p>
+  <% if @user.reciever %>
+    <div class="card">
+      <div class="card-body">
+        <p>
+          You will be giving to <%= "#{@user.reciever.first_name} #{@user.reciever.last_name}" %>
+        </p>
+      </div>
+    </div>
+  <% end %>
+</div>

@@ -13,3 +13,24 @@
  *= require_tree .
  *= require_self
  */
+ p {
+   opacity: 1.0;
+   color: black;
+ }
+
+.header {
+  margin-top: 5%;
+  margin-bottom: 5%;
+  color: lightgrey;
+  text-shadow: 0px 1px 5px 0px rgba(255, 0, 0, 0.5);
+}
+
+body {
+  background-image: url(https://i.ytimg.com/vi/HWVDgN_K5Vg/maxresdefault.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.card {
+  opacity: 0.4;
+}
