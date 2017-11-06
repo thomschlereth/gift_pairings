@@ -34,3 +34,7 @@ body {
 .card {
   opacity: 0.4;
 }
+
+li {
+  color: purple;
+}

@@ -1,6 +1,9 @@
 <div class="container">
-  <div>
-    <h2 class="header">Welcome <%= "#{@user.first_name} #{@user.last_name}" %></h2>
+  <div class="header">
+    <h2> Welcome <%= "#{@user.first_name} #{@user.last_name}" %></h2>
+    <p>
+      <%= @user.username %>
+    </p>
   </div>
 
   <% if @user.reciever %>
