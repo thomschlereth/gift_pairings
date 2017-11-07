@@ -16,12 +16,11 @@ module Seed
 
   def self.create_groupings_users(groupings, users)
 
-    groupings.each do |grouping|
-      users.each do |user|
-        if grouping.name == user.last_name
-          User.update(grouping: grouping)
-        end
+    users.each do |user|
+      grouping = groupings.find do |grouping|
+        grouping.name == user.last_name
       end
+      user.update(grouping: grouping)
     end
 
   end

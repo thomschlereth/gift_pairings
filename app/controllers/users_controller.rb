@@ -9,10 +9,8 @@ class UsersController < ApplicationController
   end
 
   def index
-    # @users = User.all
-    # User.create_pairings
-    # @receivers = User.check_recievers
-    # @givers    = User.check_givers
+    occasion = Occasion.first
+    User.create_pairings(occasion)
   end
 
   def update

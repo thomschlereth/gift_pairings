@@ -18,17 +18,10 @@ class User < ApplicationRecord
     event_users.each do |giver|
       create_match(giver,event_users)
     end
-  end
-
-  def self.check_recievers
-    User.all.map do |user|
-      "#{user.first_name} #{user.last_name} gives to #{user.reciever.first_name} #{user.reciever.last_name}"
-    end
-  end
-
-  def self.check_givers
-    User.all.map do |user|
-      "#{user.first_name} #{user.last_name} recieves from #{user.giver.first_name} #{user.giver.last_name}"
+    unhappy_guests = event_users.where({reciever: nil, giver: nil })
+    if unhappy_guests.length > 0
+      occasion.occasions_users.update(reciever: nil, giver: nil)
+      create_pairings(occasion)
     end
   end
 
@@ -36,19 +29,23 @@ class User < ApplicationRecord
 
     def self.create_match(giver,event_users)
       reciever = event_users.shuffle.find do |reciever|
-        no_grouping?(giver) || no_grouping?(reciever) || groups_dont_match(giver,reciever)
+        no_grouping?(giver) || no_grouping?(reciever) || groups_dont_match?(giver,reciever) && hasnt_recieved?(event_users, reciever)
       end
       return false if !reciever
       giver.update(reciever: reciever)
       reciever.update(giver: giver)
     end
 
-    def no_grouping?(event_user)
+    def self.no_grouping?(event_user)
       !event_user.user.grouping
     end
 
-    def groups_dont_match(giver,reciever)
+    def self.groups_dont_match?(giver,reciever)
       giver.user.grouping != reciever.user.grouping
+    end
+
+    def self.hasnt_recieved?(event_users, reciever)
+      event_users.where(reciever_id: reciever.id).length < 1
     end
 
 end
