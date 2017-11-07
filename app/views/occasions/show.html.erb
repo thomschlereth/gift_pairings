@@ -1,0 +1,22 @@
+<div class="container card form-container">
+  <% if @occasion.happy_guests? %>
+    <h4><%= "#{@occasion.title} - #{@occasion.year}" %></h4>
+  <% else %>
+    <h4><%= "#{@occasion.title} - #{@occasion.year}" %> - <%= link_to "Generate gift givers", occasion_generate_path(@occasion), method: 'patch' %></h4>
+  <% end %>
+  <div>
+    <h6><%= "Welcome #{current_user.first_name}" %></h6>
+    <% if @occasion.happy_guests? %>
+      Woo hoo! You get to give <span style="font-weight:bold"><%="#{@reciever.user.first_name} #{@reciever.user.last_name}" %></span> a gift!
+    <% else %>
+      Wonder who you'll get to give to this time!
+    <% end %>
+  </br>
+  </br>
+    <h5>Who's attending</h5>
+    <% @occasion.occasions_users.each do |user| %>
+      <div><%= "#{user.user.first_name} #{user.user.last_name}" %></div>
+
+    <% end %>
+  </div>
+</div>

@@ -1,16 +1,10 @@
 class UsersController < ApplicationController
 
   def show
-    @user = current_user
   end
 
   def edit
     @user = current_user
-  end
-
-  def index
-    occasion = Occasion.first
-    User.create_pairings(occasion)
   end
 
   def update

@@ -1,0 +1,7 @@
+<% if @occasions %>
+  <div class="container card form-container">
+    <% @occasions.each do |occasion| %>
+      <%= link_to "#{occasion.title} - #{occasion.year}", occasion_path(occasion) %>
+    <% end %>
+  </div>
+<% end %>

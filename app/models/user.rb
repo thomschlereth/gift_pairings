@@ -18,8 +18,7 @@ class User < ApplicationRecord
     event_users.each do |giver|
       create_match(giver,event_users)
     end
-    unhappy_guests = event_users.where({reciever: nil, giver: nil })
-    if unhappy_guests.length > 0
+    if !occasion.happy_guests?
       occasion.occasions_users.update(reciever: nil, giver: nil)
       create_pairings(occasion)
     end

@@ -1,17 +1,22 @@
 <div class="container">
   <div class="header">
-    <h2> Welcome <%= "#{@user.first_name} #{@user.last_name}" %></h2>
+    <h2> Hi <%= "#{current_user.first_name} #{current_user.last_name}!" %></h2>
     <p>
-      <%= @user.username %>
+      <%= current_user.username %>
     </p>
   </div>
 
-  <% @user.recievers.each do |reciever| %>
+  <% current_user.recievers.each do |reciever| %>
     <div class="card">
       <div class="card-body">
-        <p>
-          You will be giving to <%= "#{reciever.user.first_name} #{reciever.user.last_name}" %>
-        </p>
+        <div class="card">
+          <div class="card-title">
+            <%= "#{reciever.occasion.title} #{reciever.occasion.year}" %>
+          </div>
+          <div class="card-body">
+            Woo hoo! You get to give <span style="font-weight:bold"><%="#{reciever.user.first_name} #{reciever.user.last_name}" %></span> a gift on this special occasion!
+          </div>
+        </div>
       </div>
     </div>
   <% end %>
