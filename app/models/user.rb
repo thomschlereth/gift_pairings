@@ -13,15 +13,15 @@ class User < ApplicationRecord
   validates_uniqueness_of :username
 
 
-  def self.create_pairings
-    all.each do |user|
-      create_match(user)
+  def self.create_pairings(occasion)
+    event_users = occasion.occasions_users
+    event_users.each do |giver|
+      create_match(giver,event_users)
     end
   end
 
   def self.check_recievers
     User.all.map do |user|
-      # binding.pry
       "#{user.first_name} #{user.last_name} gives to #{user.reciever.first_name} #{user.reciever.last_name}"
     end
   end
@@ -34,14 +34,21 @@ class User < ApplicationRecord
 
   private
 
-    def self.create_match(user)
-      matched = all.shuffle.find do |match|
-        binding.pry
-        user.groupings.first != match.groupings.first && !match.giver
+    def self.create_match(giver,event_users)
+      reciever = event_users.shuffle.find do |reciever|
+        no_grouping?(giver) || no_grouping?(reciever) || groups_dont_match(giver,reciever)
       end
-      return false if !matched
-      user.update(reciever: matched).save
-      matched.update(giver: user).save
+      return false if !reciever
+      giver.update(reciever: reciever)
+      reciever.update(giver: giver)
+    end
+
+    def no_grouping?(event_user)
+      !event_user.user.grouping
+    end
+
+    def groups_dont_match(giver,reciever)
+      giver.user.grouping != reciever.user.grouping
     end
 
 end

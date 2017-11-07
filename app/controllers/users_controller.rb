@@ -9,7 +9,7 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = User.all
+    # @users = User.all
     # User.create_pairings
     # @receivers = User.check_recievers
     # @givers    = User.check_givers
