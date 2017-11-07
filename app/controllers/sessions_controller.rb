@@ -21,7 +21,7 @@ class SessionsController < ApplicationController
   private
 
     def check_login_toggle_and_redirect
-      if current_user.first_time_toggle
+      if params[:password] == "password"
         flash[:warning] = "Since this is your first visit, please update your password before continuing."
         redirect_to edit_user_path(current_user)
       else
