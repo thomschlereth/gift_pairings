@@ -9,6 +9,7 @@ class SessionsController < ApplicationController
       session[:user_id] = @user.id
       check_login_toggle_and_redirect
     else
+      flash[:danger] = "That was an incorrect username, or password......or both, it's probably both. Lets try again, correctly this time."
       render :new
     end
   end

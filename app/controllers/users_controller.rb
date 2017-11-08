@@ -9,6 +9,7 @@ class UsersController < ApplicationController
 
   def update
     current_user.update(users_params)
+    flash[:success] = "Wokka Wokka"
     redirect_to user_path(current_user)
   end
 
