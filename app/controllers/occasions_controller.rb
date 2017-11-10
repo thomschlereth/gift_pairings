@@ -16,7 +16,7 @@ class OccasionsController < ApplicationController
 
   def generate
     occasion = Occasion.find(params[:id])
-    User.create_pairings(occasion)
+    occasion.create_pairings
     redirect_to occasion_path(occasion)
   end
 
