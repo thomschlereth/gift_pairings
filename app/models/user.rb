@@ -12,39 +12,4 @@ class User < ApplicationRecord
   validates_presence_of :first_name, :last_name, :username, :password_digest
   validates_uniqueness_of :username
 
-
-  def self.create_pairings(occasion)
-    event_users = occasion.occasions_users
-    event_users.each do |giver|
-      create_match(giver,event_users)
-    end
-    if !occasion.happy_guests?
-      occasion.occasions_users.update(reciever: nil, giver: nil)
-      create_pairings(occasion)
-    end
-  end
-
-  private
-
-    def self.create_match(giver,event_users)
-      reciever = event_users.shuffle.find do |reciever|
-        no_grouping?(giver) || no_grouping?(reciever) || groups_dont_match?(giver,reciever) && hasnt_recieved?(event_users, reciever)
-      end
-      return false if !reciever
-      giver.update(reciever: reciever)
-      reciever.update(giver: giver)
-    end
-
-    def self.no_grouping?(event_user)
-      !event_user.user.grouping
-    end
-
-    def self.groups_dont_match?(giver,reciever)
-      giver.user.grouping != reciever.user.grouping
-    end
-
-    def self.hasnt_recieved?(event_users, reciever)
-      event_users.where(reciever_id: reciever.id).length < 1
-    end
-
 end
