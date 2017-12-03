@@ -55,7 +55,7 @@ module Seed
 
     def create_groupings(groupings)
       groupings.each do |grouping|
-        @groupings_out << Grouping.create(grouping)
+        @groupings_out << Grouping.find_or_create_by(grouping)
       end
     end
 
@@ -63,21 +63,35 @@ module Seed
 
 end
 
-occasion = { title: "Christmas Pickett's Siblings", year: '2017' }
-users = [
-  { first_name: "Thom", last_name: "Schlereth", username: "thom_schlereth", password: 'password' },
-  { first_name: "Ali", last_name: "Schlereth", username: "ali_schlereth", password: 'password' },
-  { first_name: "Jess", last_name: "Hargett", username: "jess_hargett", password: 'password' },
-  { first_name: "Bryan", last_name: "Hargett", username: "bryan_hargett", password: 'password' },
-  { first_name: "Bryan", last_name: "Howell", username: "bryan_howell", password: 'password' },
-  { first_name: "Amanda", last_name: "Howell", username: "amanda_howell", password: 'password' },
-  { first_name: "Lee", last_name: "Pickett", username: "lee_pickett", password: 'password' },
-  { first_name: "Nicole", last_name: "Pickett", username: "nicole_pickett", password: 'password' }
-]
+# occasion = { title: "Christmas Pickett's Siblings", year: '2017' }
+# users = [
+#   { first_name: "Thom", last_name: "Schlereth", username: "thom_schlereth", password: 'password' },
+#   { first_name: "Ali", last_name: "Schlereth", username: "ali_schlereth", password: 'password' },
+#   { first_name: "Jess", last_name: "Hargett", username: "jess_hargett", password: 'password' },
+#   { first_name: "Bryan", last_name: "Hargett", username: "bryan_hargett", password: 'password' },
+#   { first_name: "Bryan", last_name: "Howell", username: "bryan_howell", password: 'password' },
+#   { first_name: "Amanda", last_name: "Howell", username: "amanda_howell", password: 'password' },
+#   { first_name: "Lee", last_name: "Pickett", username: "lee_pickett", password: 'password' },
+#   { first_name: "Nicole", last_name: "Pickett", username: "nicole_pickett", password: 'password' }
+# ]
 groupings = [
   { name: "Hargett" },
   { name: "Pickett" },
   { name: "Howell" },
-  { name: "Schlereth" }
+  { name: "Schlereth" },
+  { name: "Howelltoo" }
 ]
+# Seed.run(occasion,users,groupings)
+
+occasion = { title: "Christmas Pickett's Cousins", year: "2017" }
+users = [
+  { first_name: "Ellie", last_name: "Howell", username: "ellie_howell", password: 'password' },
+  { first_name: "Alexa", last_name: "Howell", username: "alexa_howell", password: 'password' },
+  { first_name: "Enya", last_name: "Howell", username: "enya_howell", password: 'password' },
+  { first_name: "Finn", last_name: "Howelltoo", username: "finn_howell", password: 'password' },
+  { first_name: "Lee", last_name: "Pickett", username: "rodney_pickett", password: 'password' },
+  { first_name: "Andrew", last_name: "Pickett", username: "andrew_pickett", password: 'password' },
+  { first_name: "Katie", last_name: "Hargett", username: "katie_hargett", password: 'password' }
+]
+
 Seed.run(occasion,users,groupings)
