@@ -7,17 +7,19 @@
   </div>
 
   <% current_user.recievers.each do |reciever| %>
-    <div class="card">
-      <div class="card-body">
-        <div class="card">
-          <div class="card-title">
-            <%= "#{reciever.occasion.title} #{reciever.occasion.year}" %>
-          </div>
-          <div class="card-body">
-            Woo hoo! You get to give <span style="font-weight:bold"><%="#{reciever.user.first_name} #{reciever.user.last_name}" %></span> a gift on this special occasion!
+    <%= link_to occasion_path(reciever.occasion) do %>
+      <div class="card" style="color:black; text-decoration:none">
+        <div class="card-body">
+          <div class="card">
+            <div class="card-title">
+              <%= "#{reciever.occasion.title} #{reciever.occasion.year}" %>
+            </div>
+            <div class="card-body">
+              Woo hoo! You get to give <span style="font-weight:bold"><%="#{reciever.user.first_name} #{reciever.user.last_name}" %></span> a gift on this special occasion!
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    <% end %>
   <% end %>
 </div>
