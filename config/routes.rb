@@ -6,6 +6,9 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy', as: 'logout'
 
+  get '/password_reset', to: 'password_reset#new'
+  post '/password_reset', to: 'password_reset#create'
+
   patch '/occasions/:id/generate', to: 'occasions#generate', as: "occasion_generate"
   resources :occasions, only: [:show]
   resources :users, only: [:show, :edit, :update]

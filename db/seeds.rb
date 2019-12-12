@@ -87,11 +87,25 @@ occasion = { title: "Christmas Pickett's Cousins", year: "2017" }
 users = [
   { first_name: "Ellie", last_name: "Howell", username: "ellie_howell", password: 'password' },
   { first_name: "Alexa", last_name: "Howell", username: "alexa_howell", password: 'password' },
-  { first_name: "Enya", last_name: "Howell", username: "enya_howell", password: 'password' },
+  { first_name: "anya", last_name: "Howell", username: "anya_howell", password: 'password' },
   { first_name: "Finn", last_name: "Howelltoo", username: "finn_howell", password: 'password' },
   { first_name: "Lee", last_name: "Pickett", username: "rodney_pickett", password: 'password' },
   { first_name: "Andrew", last_name: "Pickett", username: "andrew_pickett", password: 'password' },
-  { first_name: "Katie", last_name: "Hargett", username: "katie_hargett", password: 'password' }
+  { first_name: "Kaity", last_name: "Hargett", username: "kaity_hargett", password: 'password' }
 ]
 
 Seed.run(occasion,users,groupings)
+
+User.where(username:
+[
+  "rodney_pickett",
+  "alexa_howell",
+  "anya_howell",
+  "finn_howell",
+  "andrew_pickett",
+  "kaity_hargett"
+])
+
+
+"ellie_howell",
+"blueberry"

@@ -1,0 +1,9 @@
+<div class="container card form-container">
+  <p>Oh no! You're having trouble logging in? Enter your email and we'll send you a link so you can one time login and update your information</p>
+  <%= form_tag("/password_reset", method: "post") do %>
+    <div class="form-group">
+      <%= text_field_tag(:email, "", { class: 'form-control', placeholder: "email" } )%>
+    </div>
+    <%= submit_tag("Reset", class: 'btn btn-danger btn-sm') %>
+  <% end %>
+</div>
